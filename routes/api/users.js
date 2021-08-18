@@ -21,7 +21,7 @@ router.post(
     check(
       "password",
       "Please enter a password with 6 or more characters"
-    ).isLength({ min: 6 }),
+    ).isLength({ min: 6 })
   ],
   async (req, res) => {
     //console.log(req.body);
@@ -42,31 +42,32 @@ router.post(
       const avatar = gravatar.url(email, {
         s: "200",
         r: "pg",
-        d: "mm",
+        d: "mm"
       });
 
       user = new User({
         name,
         email,
         avatar, // creating a new instance of the user but before we save to database we need to encrpyt their password
-        password,
+        password
       });
       //Encrypt password using bcrypt
       const salt = await bcrypt.genSalt(10); //more rounds the more secure so 10
       user.password = await bcrypt.hash(password, salt);
       await user.save(); //anything that returns a promise put awake in front of
+
       const payload = {
         user: {
-          id: user.id, //mongoose allows for no underscore
-        },
+          id: user.id //mongoose allows for no underscore
+        }
       };
 
       jwt.sign(
         payload,
-        config.get("jwtSec"),
-        { expiresIn: 36000 }, //optional expiration
+        config.get("jwtSecret"),
+        { expiresIn: 360000 }, //optional expiration
         (err, token) => {
-          if (erro) throw err;
+          if (err) throw err;
           res.json({ token });
         }
       );
