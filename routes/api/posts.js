@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-//at route  GET api/auth
+//at route  GET api/posts
 //@desc     test route
 //@access   Public
 //Do you need a token to access that route? Unauthorized or authorized access
