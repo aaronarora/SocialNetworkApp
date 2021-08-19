@@ -8,6 +8,7 @@ const connectDB = async () => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true,
+      useFindAndModify: false
     }); // wait for promise so add await in front
     console.log("MongoDB is connected!");
   } catch (err) {
