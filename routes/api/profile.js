@@ -1,4 +1,6 @@
 const express = require("express");
+const request = require("request");
+const config = require("config");
 const router = express.Router();
 const auth = require("../../middleware/auth"); //bring in and add a 2nd parameter to protect info
 const { check, validationResult } = require("express-validator/check");
@@ -232,7 +234,7 @@ router.delete("/experience/:exp_id", auth, async (req, res) => {
 
 //------Education--------
 
-//at route  PUT api/profile/education
+//@ route  PUT api/profile/education
 //@desc    Add profile education
 //@access   Private
 
